@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from "react-native";
-import NavBar from "../components/navbar";
 import Start from "./startpage";
 
 export default function Page() {
@@ -8,7 +7,6 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.main}>
         <Start />
-        <NavBar/>
       </View>
     </View>
   );

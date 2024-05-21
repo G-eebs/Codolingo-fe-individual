@@ -1,13 +1,13 @@
-import { Text, View, TextInput, Image, Pressable, Button, StyleSheet } from 'react-native';
-import {Link} from 'expo-router'
+import { Text, View, TextInput, Image, Pressable, StyleSheet } from 'react-native';
+import { Link } from 'expo-router'
 
 const MainImage = require("../assets/geoffrey.jpg");
 
 export default function Start() {
   return (
     <View style={styles.container}>
-      <View style={styles.top}>
-        <Text style={[styles.text, styles.header]}>Welcome to Codolingo...</Text>
+      <View style={styles.header}>
+        <Text style={[styles.text, styles.title]}>Welcome to Codolingo...</Text>
         <View>
           <Image style={styles.image} source={MainImage} />
         </View>
@@ -17,27 +17,22 @@ export default function Start() {
         Getting basic & fundamental knowledge on the go
       </Text>
 
-      <View >
-        <View style={styles.form}>
-          <TextInput placeholder="username" style={styles.text}></TextInput>
-        </View>
-        <View style={styles.form} >
-          <TextInput placeholder="password" style={styles.text}></TextInput>
-        </View>
-      </View>
+      <TextInput placeholder="username" style={styles.form} />
+
+      <TextInput placeholder="password" style={styles.form} />
+
 
       <View style={styles.padding}>
         <View style={styles.buttons}>
           <Pressable>
-          <Link href="/home" style={styles.text}>Sign in</Link>
+            <Link href="/home" style={styles.text}>Sign in</Link>
           </Pressable>
         </View>
 
-        <View style={styles.buttons}>
-          <Pressable>
+        <Pressable style={styles.buttons}>
           <Link href="/create-account" style={styles.text}>Create an account</Link>
-          </Pressable>
-        </View>
+        </Pressable>
+
       </View>
     </View>
   );
@@ -48,7 +43,9 @@ export default function Start() {
 const styles = StyleSheet.create({
   text: {
     fontFamily: "monospace",
+    fontSize: 20,
   },
+
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -57,19 +54,19 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  header: {
+  title: {
     fontSize: 25,
   },
 
   image: {
-    height: 150,
-    width: 150,
+    height: 120,
+    width: 120,
     borderColor: "grey",
-    borderWidth: 2.5,
-    borderRadius: 5,
+    borderWidth: 4,
+    borderRadius: 10,
   },
 
-  top: {
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
 
   description: {
     flexDirection: "row",
-    width: 150,
+    width: 190,
     height: 150,
     fontSize: 22,
   },
@@ -90,6 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#d3d3d3",
     margin: 5,
     color: "black",
+    fontSize: 16,
+    fontFamily: "monospace"
   },
 
   buttons: {
