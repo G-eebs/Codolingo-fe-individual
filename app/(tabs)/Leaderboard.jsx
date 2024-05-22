@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
 import { Text, View } from "react-native";
 
-
-export default function Leaderboard(){
-    return (
+export default function Leaderboard() {
+  return (
     <View>
-        <Text>Leaderboard</Text>
-      
+      <Text>Leaderboard</Text>
     </View>
-)
+  );
 }

@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
 import { Text, View } from "react-native";
 
-
-export default function Settings(){
-    return (
+export default function Settings() {
+  return (
     <View>
-        <Text>Settings</Text>
-     
+      <Text>Settings</Text>
     </View>
-    )
+  );
 }

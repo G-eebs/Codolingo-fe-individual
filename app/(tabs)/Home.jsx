@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
 import { Link } from "expo-router";
@@ -21,27 +21,27 @@ export default function Home() {
           </Link>
         </View>
         <View style={styles.circle}>
-          <Link href="/home" style={styles.circleText}>
+          <Link href="/Home" style={styles.circleText}>
             2
           </Link>
         </View>
         <View style={styles.circle}>
-          <Link style={styles.circleText} href="/home">
+          <Link style={styles.circleText} href="/Home">
             3
           </Link>
         </View>
         <View style={styles.circle}>
-          <Link style={styles.circleText} href="/home">
+          <Link style={styles.circleText} href="/Home">
             4
           </Link>
         </View>
         <View style={styles.circle}>
-          <Link style={styles.circleText} href="/home">
+          <Link style={styles.circleText} href="/Home">
             5
           </Link>
         </View>
         <View style={styles.circle}>
-          <Link style={styles.circleText} href="/home">
+          <Link style={styles.circleText} href="/Home">
             6
           </Link>
         </View>

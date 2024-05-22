@@ -1,31 +1,35 @@
-import React from 'react'
-import { Text, View, TextInput, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
-import { Link } from 'expo-router'
+import React from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  Image,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { Link } from "expo-router";
 
-const mainImage = require("../assets/geoffrey.jpg");
-const avatar1 = require("../assets/avatar1.jpg")
-const avatar2 = require("../assets/avatar2.jpg")
-const upload = require("../assets/upload.jpeg")
+const mainImage = require("../../assets/geoffrey.jpg");
+const avatar1 = require("../../assets/avatar1.jpg");
+const avatar2 = require("../../assets/avatar2.jpg");
+const upload = require("../../assets/upload.jpeg");
 
 export default function CreateAccount() {
   return (
     <View style={styles.container}>
-
       <View style={styles.header}>
         <Text style={[styles.text, styles.title]}>Welcome to Codolingo...</Text>
         <Image style={styles.headerImage} source={mainImage} />
       </View>
-      <Text style={styles.text}>
-        Create an account:
-      </Text>
+      <Text style={styles.text}>Create an account:</Text>
 
-      <View >
-       
-          <TextInput placeholder="username" style={styles.form}/>
-       
-          <TextInput placeholder="password" style={styles.form}/>
- 
-        <View style={styles.inputText} >
+      <View>
+        <TextInput placeholder="username" style={styles.form} />
+
+        <TextInput placeholder="password" style={styles.form} />
+
+        <View style={styles.inputText}>
           <Text style={styles.text}>Choose an avatar:</Text>
         </View>
       </View>
@@ -40,20 +44,20 @@ export default function CreateAccount() {
         </TouchableOpacity>
 
         <Image style={styles.image} source={upload} />
-
-      </View >
+      </View>
       <Pressable style={styles.buttons}>
-        <Link href="/home" style={styles.text}>Create profile & sign in</Link>
+        <Link href="/Home" style={styles.text}>
+          Create profile & sign in
+        </Link>
       </Pressable>
-
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   text: {
     fontFamily: "monospace",
-    fontSize: 20
+    fontSize: 20,
   },
 
   container: {
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "black",
     fontSize: 16,
-    fontFamily: "monospace"
+    fontFamily: "monospace",
   },
 
   image: {
@@ -117,4 +121,4 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "black",
   },
-})
+});

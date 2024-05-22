@@ -1,6 +1,13 @@
-import React from 'react'
-import { Text, View, TextInput, Image, Pressable, StyleSheet } from 'react-native';
-import { Link } from 'expo-router'
+import React from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  Image,
+  Pressable,
+  StyleSheet,
+} from "react-native";
+import { Link } from "expo-router";
 
 const MainImage = require("../../assets/geoffrey.jpg");
 
@@ -22,18 +29,20 @@ export default function Start() {
 
       <TextInput placeholder="password" style={styles.form} />
 
-
       <View style={styles.padding}>
         <View style={styles.buttons}>
           <Pressable>
-            <Link href="/home" style={styles.text}>Sign in</Link>
+            <Link replace href="/Home" style={styles.text}>
+              Sign in
+            </Link>
           </Pressable>
         </View>
 
         <Pressable style={styles.buttons}>
-          <Link href="/create-account" style={styles.text}>Create an account</Link>
+          <Link href="/Create-account" style={styles.text}>
+            Create an account
+          </Link>
         </Pressable>
-
       </View>
     </View>
   );
@@ -89,7 +98,7 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "black",
     fontSize: 16,
-    fontFamily: "monospace"
+    fontFamily: "monospace",
   },
 
   buttons: {
@@ -103,5 +112,5 @@ const styles = StyleSheet.create({
 
   padding: {
     padding: 15,
-  }
+  },
 });
