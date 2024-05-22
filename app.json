@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "codolingo",
+    "scheme": "exp://",
     "name": "codolingo",
     "slug": "codolingo",
     "version": "1.0.0",

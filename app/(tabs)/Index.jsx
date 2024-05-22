@@ -1,5 +1,6 @@
+import React from 'react'
 import { StyleSheet, Text, View } from "react-native";
-import Start from "./startpage";
+import Start from "./Startpage";
 
 export default function Page() {
 

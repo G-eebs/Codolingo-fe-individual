@@ -1,7 +1,8 @@
+import React from 'react'
 import { StyleSheet, Text, View, Image } from "react-native";
-import NavBar from "../components/navbar";
+
 import { Link } from "expo-router";
-const MainImage = require("../assets/geoffrey.jpg");
+const MainImage = require("../../assets/geoffrey.jpg");
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
 
       <View style={styles.circles}>
         <View style={styles.circle}>
-          <Link href="/home" style={styles.circleText}>
+          <Link href="/Home" style={styles.circleText}>
             1
           </Link>
         </View>
@@ -45,8 +46,6 @@ export default function Home() {
           </Link>
         </View>
       </View>
-
-      <NavBar />
     </View>
   );
 }

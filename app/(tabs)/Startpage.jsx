@@ -1,7 +1,8 @@
+import React from 'react'
 import { Text, View, TextInput, Image, Pressable, StyleSheet } from 'react-native';
 import { Link } from 'expo-router'
 
-const MainImage = require("../assets/geoffrey.jpg");
+const MainImage = require("../../assets/geoffrey.jpg");
 
 export default function Start() {
   return (
