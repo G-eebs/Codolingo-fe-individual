@@ -5,20 +5,19 @@ import { useState } from "react";
 const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
-
   const [lessons, setLessons] = useState([
-		{
-			_id: 1,
-			questions: [1, 2, 3, 4],
-		},
-		{
-			_id: 2,
-			questions: [5, 6, 7, 8],
-		},
-	]);
+    {
+      _id: 1,
+      questions: [1, 2, 3, 4],
+    },
+    {
+      _id: 2,
+      questions: [5, 6, 7, 8],
+    },
+  ]);
 
   return (
-    <View>
+    <>
       <View style={styles.header}>
         <Text style={[styles.text, styles.title]}>
           Click on a lesson to begin...
@@ -27,38 +26,19 @@ export default function Home() {
       </View>
 
       <View style={styles.circles}>
-        <View style={styles.circle} lesson={lessons[0]}>
-          <Link href="/Home/lesson" style={styles.circleText}>
-            1
-          </Link>
-        </View>
-        <View style={styles.circle}>
-          <Link href="/Home" style={styles.circleText}>
-            2
-          </Link>
-        </View>
-        <View style={styles.circle}>
-          <Link style={styles.circleText} href="/Home">
-            3
-          </Link>
-        </View>
-        <View style={styles.circle}>
-          <Link style={styles.circleText} href="/Home">
-            4
-          </Link>
-        </View>
-        <View style={styles.circle}>
-          <Link style={styles.circleText} href="/Home">
-            5
-          </Link>
-        </View>
-        <View style={styles.circle}>
-          <Link style={styles.circleText} href="/Home">
-            6
-          </Link>
-        </View>
+        {lessons.map((lesson) => {
+          return (
+            <Link
+              key={lesson._id}
+              style={styles.circle}
+              href={`/Home/${lesson._id}`}
+            >
+              {lesson._id}
+            </Link>
+          );
+        })}
       </View>
-    </View>
+    </>
   );
 }
 
@@ -72,7 +52,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    margin: 5,
+    marginTop: 15,
+    fontFamily: "monospace",
+    fontSize: 20,
+    textAlign: "center",
+    padding: 13,
   },
 
   header: {
@@ -93,12 +77,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-
-  circleText: {
-    fontFamily: "monospace",
-    fontSize: 20,
-    textAlign: "center",
-    marginTop: 13,
   },
 });
