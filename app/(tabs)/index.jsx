@@ -32,7 +32,7 @@ export default function Start() {
       <View style={styles.padding}>
         <View style={styles.buttons}>
           <Pressable>
-            <Link replace href="/Home" style={styles.text}>
+            <Link href="/Home" style={styles.text}>
               Sign in
             </Link>
           </Pressable>
