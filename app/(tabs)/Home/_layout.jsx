@@ -9,7 +9,6 @@ export default function home() {
         name="index"
         options={{
           title: "Home",
-          href: null,
           headerShown: false,
         }}
       />
@@ -17,7 +16,6 @@ export default function home() {
         name="[lesson]"
         options={({ route }) =>({
           title: `Lesson ${route.params.lesson}`,
-          href: null,
         })}
       />
     </Stack>
