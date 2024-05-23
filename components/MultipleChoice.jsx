@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
-export default function MultipleChoice({ question }) {
+export default function MultipleChoice({ question, setUserAnswer }) {
   return (
     <View style={styles.questionSection}>
       <Text style={styles.teaching}>{question.teaching}</Text>
       <Text style={styles.question}>{question.question}</Text>
-      {question.options.map((option) => {
+      {question.options.map((option, index) => {
         return (
-          <Pressable key={option} style={styles.option}>
+          <Pressable onPress={() => {setUserAnswer(index)}} key={option} style={styles.option}>
             <Text style={styles.options}>- {option}</Text>
           </Pressable>
         );

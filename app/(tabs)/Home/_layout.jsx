@@ -1,6 +1,8 @@
 import { Stack } from "expo-router/stack";
+import { useState } from "react";
 
 export default function home() {
+
   return (
     <Stack>
       <Stack.Screen
@@ -13,10 +15,10 @@ export default function home() {
       />
       <Stack.Screen
         name="[lesson]"
-        options={{
-          title: "Lesson",
+        options={({ route }) =>({
+          title: `Lesson ${route.params.lesson}`,
           href: null,
-        }}
+        })}
       />
     </Stack>
   );

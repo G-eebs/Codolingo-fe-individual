@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import MultipleChoice from "../../../components/MultipleChoice";
 
-export default function Lesson(lesson) {
+export default function Lesson({lessonId}) {
+
   const [questions, setQuestions] = useState([
     {
       _id: 1,
@@ -60,11 +61,25 @@ export default function Lesson(lesson) {
     },
   ]);
 
+  const [userAnswer, setUserAnswer] = useState(null)
+
+  useEffect(()=>{
+    if (userAnswer === questions[0].answer) {
+      setQuestions((current)=>{
+        const newQuestions = [...current]
+        newQuestions.shift()
+        return newQuestions
+      })
+    }
+  },[userAnswer])
+
+  console.log(lessonId);
+
   return (
     <View>
       <Text>{useLocalSearchParams().lesson}</Text>
       {questions[0].type === "multiple choice" && (
-        <MultipleChoice question={questions[0]} />
+        <MultipleChoice question={questions[0]} setUserAnswer={setUserAnswer} />
       )}
     </View>
   );
