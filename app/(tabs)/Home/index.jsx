@@ -1,10 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-
 import { Link } from "expo-router";
-const MainImage = require("../../assets/geoffrey.jpg");
+import { useState } from "react";
+const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
+
+  const [lessons, setLessons] = useState([
+		{
+			_id: 1,
+			questions: [1, 2, 3, 4],
+		},
+		{
+			_id: 2,
+			questions: [5, 6, 7, 8],
+		},
+	]);
+
   return (
     <View>
       <View style={styles.header}>
@@ -15,8 +27,8 @@ export default function Home() {
       </View>
 
       <View style={styles.circles}>
-        <View style={styles.circle}>
-          <Link href="/Home" style={styles.circleText}>
+        <View style={styles.circle} lesson={lessons[0]}>
+          <Link href="/Home/lesson" style={styles.circleText}>
             1
           </Link>
         </View>
