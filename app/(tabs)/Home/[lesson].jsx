@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     padding: 5,
 		fontFamily: "monospace",
 		fontSize: 20,
-    fontWeight: 600,
+    fontWeight: "600",
     borderColor: "blue",
 		borderStyle: "solid",
 		borderWidth: 1,
