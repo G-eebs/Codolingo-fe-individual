@@ -1,20 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAllLessons } from "../../../utlis/utils";
 const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
-  const [lessons, setLessons] = useState([
-    {
-      _id: 1,
-      questions: [1, 2, 3, 4],
-    },
-    {
-      _id: 2,
-      questions: [5, 6, 7, 8],
-    },
-  ]);
+  const [allLessons, setAllLessons] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllLessons()
+      .then((response) => {
+        setAllLessons(response.data.lessons);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -26,7 +35,7 @@ export default function Home() {
       </View>
 
       <View style={styles.circles}>
-        {lessons.map((lesson) => {
+        {allLessons.map((lesson) => {
           return (
             <Link
               key={lesson._id}

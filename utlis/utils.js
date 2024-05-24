@@ -35,4 +35,6 @@ export function getQuestionsById(_id) {
     return baseApi.get(`api/questions/${_id}`)
 }
 
-
+export function getQuestionsByLessonId(){
+    return baseApi.get(`api/lessons/${_id}/questions`)
+}
