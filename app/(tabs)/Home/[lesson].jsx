@@ -65,7 +65,7 @@ export default function Lesson() {
 				newQuestions.shift();
 				return newQuestions;
 			});
-      setUserAnswer(null)
+			setUserAnswer(null)
 		}
 	}
 	return (
@@ -74,7 +74,7 @@ export default function Lesson() {
 			{questions[0].type === "multiple choice" && (
 				<MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
 			)}
-      {questions[0].type === "drag and drop" && (
+			{questions[0].type === "drag and drop" && (
 				<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
 			)}
 			<TouchableOpacity onPress={handleSubmit}>
@@ -85,19 +85,19 @@ export default function Lesson() {
 }
 
 const styles = StyleSheet.create({
-  lesson: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  submitButton: {
-    width: "fit-content",
-    padding: 5,
+	lesson: {
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	submitButton: {
+		width: "fit-content",
+		padding: 5,
 		fontFamily: "monospace",
 		fontSize: 20,
-    fontWeight: "600",
-    borderColor: "blue",
+		fontWeight: "600",
+		borderColor: "blue",
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 5,
-  }
+	}
 })
