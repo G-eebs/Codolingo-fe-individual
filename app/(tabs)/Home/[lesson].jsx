@@ -60,7 +60,7 @@ export default function Lesson() {
 		return <Text style={[styles.text, styles.loading]}>Loading...</Text>;
 	} else if (incorrect) {
 		return (
-			<View style={styles.lesson}>
+			<View style={styles.background}>
 				<Text style={[styles.text, styles.incorrect]}>{`That's not right`}</Text>
 				<TouchableOpacity
 					onPress={() => {
@@ -75,25 +75,29 @@ export default function Lesson() {
 
 	if (questions.length === 0) {
 		return (
-			<View style={styles.lesson}>
+			<View style={styles.background}>
 				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
-				<Link href="/Home" style={styles.button}>Return to lessons</Link>
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
 			</View>
 		);
 	}
-	
+
 	return (
-		<ScrollView contentContainerStyle={styles.lesson}>
-			{questions[0].type === "multiple choice" && (
-				<MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
-			)}
-			{questions[0].type === "drag and drop" && (
-				<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
-			)}
-			<TouchableOpacity onPress={handleSubmit}>
-				<Text style={styles.button}>Submit</Text>
-			</TouchableOpacity>
-		</ScrollView>
+		<View style={styles.background}>
+			<ScrollView contentContainerStyle={styles.lesson}>
+				{questions[0].type === "multiple choice" && (
+					<MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+				)}
+				{questions[0].type === "drag and drop" && (
+					<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+				)}
+				<TouchableOpacity onPress={handleSubmit}>
+					<Text style={styles.button}>Submit</Text>
+				</TouchableOpacity>
+			</ScrollView>
+		</View>
 	);
 }
 
@@ -103,8 +107,15 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 
+	background: {
+		alignItems: "center",
+		backgroundColor: "#bbb",
+		height: "100%",
+		paddingBottom: 15,
+	},
+
 	loading: {
-		paddingTop: 15,
+		paddingVertical: 15,
 		textAlign: "center",
 		height: "100%",
 		backgroundColor: "#bbb",
@@ -113,8 +124,6 @@ const styles = StyleSheet.create({
 	lesson: {
 		alignItems: "center",
 		height: "100vh",
-		paddingBottom: 15,
-		backgroundColor: "#bbb",
 	},
 
 	button: {
