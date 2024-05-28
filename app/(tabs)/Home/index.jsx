@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "expo-router";
 import { useState, useEffect } from "react";
-import { getAllLessons } from "../../../utlis/utils";
+import { getAllLessons } from "../../../utils/utils";
 const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
