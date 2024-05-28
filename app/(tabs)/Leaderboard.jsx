@@ -10,7 +10,7 @@ export default function Leaderboard() {
 	useEffect(() => {
 		getAllUsers()
 			.then((fetchedUsers) => {
-				const sortedUsers = fetchedUsers.data.users.sort((a, b) => b.score - a.score)
+				const sortedUsers = fetchedUsers.data.users.sort((a, b) => b.progress.length - a.progress.length)
 				setUsers(sortedUsers);
 				setLoading(false);
 			})
@@ -27,7 +27,7 @@ export default function Leaderboard() {
 			{users.map((user) => {
 				return (
 					<View key={user.user_name}>
-						<ScoreCard username={user.user_name} avatar={user.avatar_url} score={user.score} />
+						<ScoreCard username={user.user_name} avatar={user.avatar_url} score={user.progress.length * 10} />
 					</View>
 				);
 			})}
