@@ -10,7 +10,7 @@ export default function Leaderboard() {
 	useEffect(() => {
 		getAllUsers()
 			.then((fetchedUsers) => {
-				const sortedUsers = fetchedUsers.data.users.sort((a, b) => a.score - b.score).reverse();
+				const sortedUsers = fetchedUsers.data.users.sort((a, b) => b.score - a.score)
 				setUsers(sortedUsers);
 				setLoading(false);
 			})
