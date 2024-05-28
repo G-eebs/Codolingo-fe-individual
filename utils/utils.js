@@ -24,11 +24,11 @@ export function postUser(user) {
 }
 
 export function patchUserFollowing(user_name, userToFollow) {
-    return baseApi.patch(`api/users/${user_name}`, userToFollow)
+    return baseApi.patch(`api/users/${user_name}/following`, userToFollow)
 }
 
 export function patchUserProgress(user_name, userProgress) {
-    return baseApi.patch(`api/users/${user_name}`, userProgress)
+    return baseApi.patch(`api/users/${user_name}/progress`, userProgress)
 }
 
 export function getQuestionsById(_id) {
