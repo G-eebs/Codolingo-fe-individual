@@ -1,103 +1,137 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocalSearchParams } from "expo-router";
 import MultipleChoice from "../../../components/MultipleChoice";
 import DragAndDrop from "../../../components/DragAndDrop";
-
+import { getQuestionsByLessonId, patchUserProgress } from "../../../utils/utils";
+import { UserContext } from "../../../contexts/User";
 
 export default function Lesson() {
-	const [questions, setQuestions] = useState([
-		{
-			_id: 1,
-			type: "multiple choice",
-			teaching:
-				"A variable is like a box that holds data that you can use and manipulate in your program. Think of it as a labelled bag where you can store different types of information.",
-			question: "What is a variable?",
-			options: ["a container to store data", "an ordered list", "an unordered list", "a set of items"],
-			answer: 0,
-			help_url: "https://www.w3schools.com/python/python_variables.asp",
-		},
-		{
-			_id: 2,
-			type: "multiple choice",
-			teaching:
-				"In Python, assigning a value to a variable is straightforward. You use the equals sign (=) to do this.",
-			question: "How would you assign a value to a variable?",
-			options: ["let a = 7", "var a = 7", "a = 7", "const a = 7"],
-			answer: 2,
-			help_url: "https://www.w3schools.com/python/python_variables.asp",
-		},
-		{
-			_id: 3,
-			type: "multiple choice",
-			teaching:
-				"Tuple assignment allows for the assignment of multiple values to multiple variables. Example: a, b = 1, 2 assigns 1 to a and 2 to b.",
-			question: "Multiples values can be assigned to multiple variables at once.",
-			options: ["true", "false"],
-			answer: 0,
-			help_url: "https://www.w3schools.com/python/python_variables.asp",
-		},
-		{
-			_id: 4,
-			type: "drag and drop",
-			teaching: `In Python, comparison operators allow you to compare values and determine relationships between them. Let's break down each operator:\n== This operator checks if two values are equal. For example, 5 == 5 returns True.\n! The exclamation mark (!) stands for "not" in Python. It's used in combination with = to form the != operator, which checks if two values are not equal. For instance, 5 != 3 returns True.\n> This operator checks if the value on the left is greater than the value on the right. For example, 7 > 5 returns True.\n< This operator checks if the value on the left is less than the value on the right. For instance, 3 < 5 returns True.`,
-			question: "Drag the following to the correct definition:",
-			options: ["<=", "!=", "<", "==", ">=", ">"],
-			answer_options: [
-				"is equal to",
-				"not equal to",
-				"greater than",
-				"less than",
-				"greater than or equal to",
-				"less than or equal to",
-			],
-			answer: ["==", "!=", ">", "<", ">=", "<="],
-			help_url: "https://www.w3schools.com/python/python_operators.asp",
-		},
-	]);
+	const [questions, setQuestions] = useState([]);
+
+	const [loading, setLoading] = useState(true);
 
 	const [userAnswer, setUserAnswer] = useState(null);
 
+	const [incorrect, setIncorrect] = useState(false);
+
+	const lessonId = useLocalSearchParams().lesson;
+
+	const { user, setUser } = useContext(UserContext);
+
+	useEffect(() => {
+		setLoading(true);
+		getQuestionsByLessonId(lessonId)
+			.then((response) => {
+				const requestedQuestions = response.data.questions;
+				const filteredQuestions = requestedQuestions.filter((question) => !user.progress.includes(question._id));
+				setQuestions(filteredQuestions);
+				setLoading(false);
+			})
+			.catch((error) => {
+				console.log(error);
+				setLoading(false);
+			});
+	}, []);
+
 	function handleSubmit() {
 		if (userAnswer === questions[0].answer) {
+			patchUserProgress(user.user_name, { progress: questions[0]._id }).then((response) => {
+				setUser(response.data.user);
+				setQuestions((current) => {
+					const newQuestions = [...current];
+					newQuestions.shift();
+					return newQuestions;
+				});
+			});
+		} else {
+			setIncorrect(true);
 			setQuestions((current) => {
 				const newQuestions = [...current];
+				newQuestions.push(newQuestions[0]);
 				newQuestions.shift();
 				return newQuestions;
 			});
-      setUserAnswer(null)
 		}
+		setUserAnswer(null);
 	}
+
+	if (loading) {
+		return <Text style={[styles.text, styles.loading]}>Loading...</Text>;
+	} else if (incorrect) {
+		return (
+			<View style={styles.lesson}>
+				<Text style={[styles.text, styles.incorrect]}>{`That's not right`}</Text>
+				<TouchableOpacity
+					onPress={() => {
+						setIncorrect(false);
+					}}
+				>
+					<Text style={styles.button}>Got it</Text>
+				</TouchableOpacity>
+			</View>
+		);
+	}
+
+	if (questions.length === 0) {
+		return (
+			<View style={styles.lesson}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+				<Link href="/Home" style={styles.button}>Return to lessons</Link>
+			</View>
+		);
+	}
+	
 	return (
-		<View style={styles.lesson}>
-			<Text>{useLocalSearchParams().lesson}</Text>
+		<ScrollView contentContainerStyle={styles.lesson}>
 			{questions[0].type === "multiple choice" && (
 				<MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
 			)}
-      {questions[0].type === "drag and drop" && (
+			{questions[0].type === "drag and drop" && (
 				<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
 			)}
 			<TouchableOpacity onPress={handleSubmit}>
-				<Text style={styles.submitButton} >Submit</Text>
+				<Text style={styles.button}>Submit</Text>
 			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-  lesson: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  submitButton: {
-    width: "fit-content",
-    padding: 5,
+	text: {
 		fontFamily: "monospace",
 		fontSize: 20,
-    fontWeight: "600",
-    borderColor: "blue",
+	},
+
+	loading: {
+		paddingTop: 15,
+		textAlign: "center",
+		height: "100%",
+		backgroundColor: "#bbb",
+	},
+
+	lesson: {
+		alignItems: "center",
+		height: "100vh",
+		paddingBottom: 15,
+		backgroundColor: "#bbb",
+	},
+
+	button: {
+		width: "fit-content",
+		padding: 5,
+		fontFamily: "monospace",
+		fontSize: 20,
+		fontWeight: "600",
+		borderColor: "blue",
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 5,
-  }
-})
+		backgroundColor: "#fff",
+	},
+
+	incorrect: {
+		marginVertical: 15,
+		textAlign: "center",
+	},
+});
