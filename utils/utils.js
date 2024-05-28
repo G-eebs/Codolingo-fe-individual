@@ -24,17 +24,17 @@ export function postUser(user) {
 }
 
 export function patchUserFollowing(user_name, userToFollow) {
-    return baseApi.post(`api/users/${user_name}`, userToFollow)
+    return baseApi.patch(`api/users/${user_name}/following`, userToFollow)
 }
 
 export function patchUserProgress(user_name, userProgress) {
-    return baseApi.post(`api/users/${user_name}`, userProgress)
+    return baseApi.patch(`api/users/${user_name}/progress`, userProgress)
 }
 
 export function getQuestionsById(_id) {
     return baseApi.get(`api/questions/${_id}`)
 }
 
-export function getQuestionsByLessonId(){
+export function getQuestionsByLessonId(_id){
     return baseApi.get(`api/lessons/${_id}/questions`)
 }

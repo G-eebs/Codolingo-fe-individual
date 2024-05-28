@@ -75,6 +75,13 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 
+	loading: {
+		paddingTop: 15,
+		textAlign: "center",
+		height: "100%",
+    backgroundColor: "#bbb",
+	},
+
 	header: {
 		padding: 15,
     borderBottomLeftRadius: 25,
@@ -114,8 +121,4 @@ const styles = StyleSheet.create({
     height: 60,
 	},
 
-	loading: {
-		marginTop: 15,
-		textAlign: "center",
-	},
 });
