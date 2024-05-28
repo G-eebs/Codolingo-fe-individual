@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         margin: 10,
         borderRadius: 10,
-        borderColor: "#C3BABA",
+        borderColor: "green",
         borderWidth: 2,
        
     },
@@ -53,13 +53,15 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         margin: 20,
+        marginLeft: 18,
         borderRadius: 50,
         borderColor: "green",
         borderWidth: 4,
         padding: 5,
     },
     score: {
-        margin: 20,
+        marginRight: 20,
+        marginLeft: "auto",
         fontWeight: "normal",
     }
 })
