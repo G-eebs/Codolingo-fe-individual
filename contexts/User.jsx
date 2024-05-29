@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getUserByUsername } from "../utils/utils";
 
 export const UserContext = createContext();
 
@@ -12,6 +13,12 @@ export const UserProvider = ({ children }) => {
 		following: ["cogger101"],
 		progress: [1, 2, 3, 4, 5, 6, 7],
 	});
+
+	useEffect(() => {
+		getUserByUsername("cogger101").then((response) => {
+			setUser(response.data.user);
+		});
+	}, []);
 
 	return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
 };
