@@ -1,11 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform, Image } from "react-native";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link, useLocalSearchParams } from "expo-router";
 import MultipleChoice from "../../../components/MultipleChoice";
 import DragAndDrop from "../../../components/DragAndDrop";
@@ -16,6 +11,8 @@ import {
 } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
 import { Audio } from "expo-av";
+
+import LottieView from 'lottie-react-native';
 
 export default function Lesson() {
   const [questions, setQuestions] = useState([]);
@@ -127,18 +124,34 @@ export default function Lesson() {
     );
   }
 
-  if (questions.length === 0) {
-    return (
-      <View style={styles.background}>
-        <Text style={[styles.text, styles.incorrect]}>
-          Lesson complete, Well done!
-        </Text>
-        <Link href="/Home" style={styles.button}>
-          Return to lessons
-        </Link>
-      </View>
-    );
-  }
+	if (questions.length === 0 && Platform.OS === "android") {
+		return (
+			<View style={styles.background}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+
+				<LottieView
+					source={require("../../../assets/animation.json")}
+					style={{ width: "60%", height: "60%" }}
+					autoPlay
+					loop
+				/>
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
+			</View>
+		);
+	} else if (questions.length === 0 && Platform.OS != "android") {
+		return (
+			<View style={styles.background}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+			<Image src={mainImage} width={"100%"}></Image>
+
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
+			</View>
+		);
+	}
 
   return (
     <View style={styles.background}>
@@ -209,4 +222,5 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     textAlign: "center",
   },
+
 });
