@@ -9,7 +9,7 @@ const MainImage = require("../../assets/geoffrey.jpg");
 export default function Start() {
 	const { user, setUser } = useContext(UserContext);
 
-	const [userNameInput, setUserNameInput] = useState("cogger101");
+	const [userNameInput, setUserNameInput] = useState("thompsurn");
 
 	const [passwordInput, setPasswordInput] = useState("password");
 

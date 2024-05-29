@@ -8,144 +8,148 @@ import { UserContext } from "../../../contexts/User";
 import FillInTheBlank from "../../../components/FillInTheBlank";
 
 export default function Lesson() {
-	const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
-	const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-	const [userAnswer, setUserAnswer] = useState(null);
+  const [userAnswer, setUserAnswer] = useState(null);
 
-	const [incorrect, setIncorrect] = useState(false);
+  const [incorrect, setIncorrect] = useState(false);
 
-	const lessonId = useLocalSearchParams().lesson;
+  const lessonId = useLocalSearchParams().lesson;
+  
+  const { user, setUser } = useContext(UserContext);
 
-	const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    setLoading(true);
+    getQuestionsByLessonId(lessonId)
+      .then((response) => {
+        const requestedQuestions = response.data.questions;
+        const filteredQuestions = requestedQuestions.filter((question) => !user.progress.includes(question._id));
+        setQuestions(filteredQuestions);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
-	useEffect(() => {
-		setLoading(true);
-		getQuestionsByLessonId(lessonId)
-			.then((response) => {
-				const requestedQuestions = response.data.questions;
-				const filteredQuestions = requestedQuestions.filter((question) => !user.progress.includes(question._id));
-				setQuestions(filteredQuestions);
-				setLoading(false);
-			})
-			.catch((error) => {
-				console.log(error);
-				setLoading(false);
-			});
-	}, []);
+  function handleSubmit() {
+    if (userAnswer === questions[0].answer) {
+      patchUserProgress(user.user_name, { progress: questions[0]._id }).then((response) => {
+        setUser(response.data.user);
+        setQuestions((current) => {
+          const newQuestions = [...current];
+          newQuestions.shift();
+          return newQuestions;
+        });
+      });
+    } else {
+      setIncorrect(true);
+      setQuestions((current) => {
+        const newQuestions = [...current];
+        newQuestions.push(newQuestions[0]);
+        newQuestions.shift();
+        return newQuestions;
+      });
+    }
+    setUserAnswer(null);
+  }
 
-	function handleSubmit() {
-		if (userAnswer === questions[0].answer) {
-			patchUserProgress(user.user_name, { progress: questions[0]._id }).then((response) => {
-				setUser(response.data.user);
-				setQuestions((current) => {
-					const newQuestions = [...current];
-					newQuestions.shift();
-					return newQuestions;
-				});
-			});
-		} else {
-			setIncorrect(true);
-			setQuestions((current) => {
-				const newQuestions = [...current];
-				newQuestions.push(newQuestions[0]);
-				newQuestions.shift();
-				return newQuestions;
-			});
-		}
-		setUserAnswer(null);
-	}
+  if (loading) {
+    return <Text style={[styles.text, styles.loading]}>Loading...</Text>;
+  } else if (incorrect) {
+    return (
+      <View style={styles.background}>
+        <Text style={[styles.text, styles.incorrect]}>{`That's not right`}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setIncorrect(false);
+          }}
+        >
+          <Text style={styles.button}>Got it</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
-	if (loading) {
-		return <Text style={[styles.text, styles.loading]}>Loading...</Text>;
-	} else if (incorrect) {
-		return (
-			<View style={styles.background}>
-				<Text style={[styles.text, styles.incorrect]}>{`That's not right`}</Text>
-				<TouchableOpacity
-					onPress={() => {
-						setIncorrect(false);
-					}}
-				>
-					<Text style={styles.button}>Got it</Text>
-				</TouchableOpacity>
-			</View>
-		);
-	}
+  if (questions.length === 0) {
+    return (
+      <View style={styles.background}>
+        <Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+        <Link href="/Home" style={styles.button}>
+          Return to lessons
+        </Link>
+      </View>
+    );
+  }
 
-	if (questions.length === 0) {
-		return (
-			<View style={styles.background}>
-				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
-				<Link href="/Home" style={styles.button}>
-					Return to lessons
-				</Link>
-			</View>
-		);
-	}
-
-	return (
-		<View style={styles.background}>
-			<ScrollView contentContainerStyle={styles.lesson}>
-				{questions[0].type === "multiple choice" && (
-					<MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
-				)}
-				{questions[0].type === "drag and drop" && (
-					<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
-				)}
-				{questions[0].type === "fill in the blank" && (
-					<FillInTheBlank question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
-				)}
-				<TouchableOpacity onPress={handleSubmit}>
-					<Text style={styles.button}>Submit</Text>
-				</TouchableOpacity>
-			</ScrollView>
-		</View>
-	);
+  return (
+    <View style={styles.background}>
+      <ScrollView contentContainerStyle={styles.lesson}>
+        {questions[0].type === "multiple choice" && (
+          <MultipleChoice question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+        )}
+        {questions[0].type === "drag and drop" && (
+          <View style={styles.dragAndDropContainer}>
+            <DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+          </View>
+        )}
+        {questions[0].type === "fill in the blank" && (
+          <FillInTheBlank question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+        )}
+        <TouchableOpacity onPress={handleSubmit}>
+          <Text style={styles.button}>Submit</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	text: {
-		fontFamily: "monospace",
-		fontSize: 20,
-	},
+  text: {
+    fontFamily: "monospace",
+    fontSize: 20,
+  },
 
-	background: {
-		alignItems: "center",
-		backgroundColor: "#bbb",
-		height: "100%",
-		paddingBottom: 15,
-	},
+  background: {
+    alignItems: "center",
+    backgroundColor: "#bbb",
+    height: "100%",
+    paddingBottom: 15,
+  },
 
-	loading: {
-		paddingVertical: 15,
-		textAlign: "center",
-		height: "100%",
-		backgroundColor: "#bbb",
-	},
+  loading: {
+    paddingVertical: 15,
+    textAlign: "center",
+    height: "100%",
+    backgroundColor: "#bbb",
+  },
 
-	lesson: {
-		alignItems: "center",
-		height: "100vh",
-	},
+  lesson: {
+    alignItems: "center",
+  },
 
-	button: {
-		width: "fit-content",
-		padding: 5,
-		fontFamily: "monospace",
-		fontSize: 20,
-		fontWeight: "600",
-		borderColor: "blue",
-		borderStyle: "solid",
-		borderWidth: 1,
-		borderRadius: 5,
-		backgroundColor: "#fff",
-	},
+  button: {
+    width: "fit-content",
+    padding: 5,
+    fontFamily: "monospace",
+    fontSize: 20,
+    fontWeight: "600",
+    borderColor: "blue",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: "#fff",
+  },
 
-	incorrect: {
-		marginVertical: 15,
-		textAlign: "center",
-	},
+  incorrect: {
+    marginVertical: 15,
+    textAlign: "center",
+  },
+
+  dragAndDropContainer: {
+    width: "100%", // Ensure the DragAndDrop component takes full width
+  },
 });
-

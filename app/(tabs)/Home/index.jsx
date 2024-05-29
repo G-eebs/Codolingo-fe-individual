@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { getAllLessons } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
 import CircularProgress from "react-native-circular-progress-indicator";
+import 'react-native-gesture-handler';
 const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
