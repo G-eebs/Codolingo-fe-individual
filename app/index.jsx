@@ -106,12 +106,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#dbd2e0",
 		alignItems: "stretch",
-		justifyContent: "center",
 		padding: 15,
 	},
 
 	title: {
 		fontSize: 25,
+		flexWrap: "wrap",
+    flex: 1,
 	},
 
 	image: {

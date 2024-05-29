@@ -147,6 +147,8 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontSize: 25,
+    flexWrap: "wrap",
+    flex: 1,
 	},
 
 	header: {
