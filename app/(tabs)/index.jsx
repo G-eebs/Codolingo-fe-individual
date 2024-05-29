@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react";
 import { Text, View, TextInput, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Link, router } from "expo-router";
 import { UserContext } from "../../contexts/User";
-import { getUserByUsername } from "../../utlis/utils";
+import { getUserByUsername } from "../../utils/utils";
 
 const MainImage = require("../../assets/geoffrey.jpg");
 
 export default function Start() {
 	const { user, setUser } = useContext(UserContext);
 
-	const [userNameInput, setUserNameInput] = useState("thompsurn");
+	const [userNameInput, setUserNameInput] = useState("cogger101");
 
 	const [passwordInput, setPasswordInput] = useState("password");
 
