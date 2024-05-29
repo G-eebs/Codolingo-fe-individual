@@ -4,16 +4,15 @@ import {
   View,
   TextInput,
   Image,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { Link } from "expo-router";
 
-const mainImage = require("../../assets/geoffrey.jpg");
-const avatar1 = require("../../assets/avatar1.jpg");
-const avatar2 = require("../../assets/avatar2.jpg");
-const upload = require("../../assets/upload.jpeg");
+const mainImage = require("../assets/geoffrey.jpg");
+const avatar1 = require("../assets/avatar1.jpg");
+const avatar2 = require("../assets/avatar2.jpg");
+const upload = require("../assets/upload.jpeg");
 
 export default function CreateAccount() {
   return (
@@ -45,11 +44,11 @@ export default function CreateAccount() {
 
         <Image style={styles.image} source={upload} />
       </View>
-      <Pressable style={styles.buttons}>
-        <Link href="/Home" style={styles.text}>
+      <TouchableOpacity style={styles.buttons}>
+        <Link href="/Home?welcome=true" style={styles.text}>
           Create profile & sign in
         </Link>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -66,6 +65,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
     padding: 15,
+    backgroundColor: "#dbd2e0",
   },
 
   title: {
@@ -91,11 +91,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     justifyContent: "space-around",
-    backgroundColor: "#d3d3d3",
+		backgroundColor: "#f8f8f8",
     margin: 5,
     color: "black",
     fontSize: 16,
     fontFamily: "monospace",
+    borderRadius: 15,
   },
 
   image: {
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 4,
     borderRadius: 10,
+    marginHorizontal: 5,
   },
 
   avatarContainer: {
@@ -120,5 +122,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     margin: 5,
     color: "black",
+    backgroundColor: "#f8f8f8",
+    borderRadius: 15,
   },
 });

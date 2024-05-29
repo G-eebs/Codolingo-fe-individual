@@ -5,6 +5,7 @@ import MultipleChoice from "../../../components/MultipleChoice";
 import DragAndDrop from "../../../components/DragAndDrop";
 import { getQuestionsByLessonId, patchUserProgress } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
+import FillInTheBlank from "../../../components/FillInTheBlank";
 
 export default function Lesson() {
 	const [questions, setQuestions] = useState([]);
@@ -92,6 +93,9 @@ export default function Lesson() {
 				)}
 				{questions[0].type === "drag and drop" && (
 					<DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+				)}
+				{questions[0].type === "fill in the blank" && (
+					<FillInTheBlank question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
 				)}
 				<TouchableOpacity onPress={handleSubmit}>
 					<Text style={styles.button}>Submit</Text>

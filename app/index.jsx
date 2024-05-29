@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Text, View, TextInput, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Link, router } from "expo-router";
-import { UserContext } from "../../contexts/User";
-import { getUserByUsername } from "../../utils/utils";
+import { UserContext } from "../contexts/User";
+import { getUserByUsername } from "../utils/utils";
 
-const MainImage = require("../../assets/geoffrey.jpg");
+const MainImage = require("../assets/geoffrey.jpg");
 
 export default function Start() {
 	const { user, setUser } = useContext(UserContext);
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 
 	container: {
 		flex: 1,
-		backgroundColor: "white",
+		backgroundColor: "#dbd2e0",
 		alignItems: "stretch",
 		justifyContent: "center",
 		padding: 15,
@@ -137,11 +137,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		padding: 10,
 		justifyContent: "space-around",
-		backgroundColor: "#d3d3d3",
+		backgroundColor: "#f8f8f8",
 		margin: 5,
 		color: "black",
 		fontSize: 16,
 		fontFamily: "monospace",
+		borderRadius: 15,
 	},
 
 	buttons: {
@@ -151,6 +152,8 @@ const styles = StyleSheet.create({
 		borderColor: "black",
 		margin: 5,
 		color: "black",
+		backgroundColor: "#f8f8f8",
+		borderRadius: 15,
 	},
 
 	padding: {
