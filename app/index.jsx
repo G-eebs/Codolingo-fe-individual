@@ -55,8 +55,8 @@ export default function Start() {
 
 			<TextInput
 				value={userNameInput}
-				onChange={(event) => {
-					setUserNameInput(event.target.value);
+				onChangeText={(username) => {
+					setUserNameInput(username);
 				}}
 				placeholder="username"
 				style={styles.form}
@@ -67,8 +67,8 @@ export default function Start() {
 			<TextInput
 				value={passwordInput}
 				secureTextEntry={true}
-				onChange={(event) => {
-					setPasswordInput(event.target.value);
+				onChangeText={(password) => {
+					setPasswordInput(password);
 				}}
 				placeholder="password"
 				style={styles.form}
@@ -90,8 +90,6 @@ export default function Start() {
 		</View>
 	);
 }
-
-//Note: You cannot(?) change anything other than the colour of a button in RN (in IOS it will change text/ ANDRD changes backgrnd). Solution = use pressable OR touchable
 
 const styles = StyleSheet.create({
 	text: {
