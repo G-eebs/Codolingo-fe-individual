@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform, Image } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocalSearchParams } from "expo-router";
 import MultipleChoice from "../../../components/MultipleChoice";
@@ -6,6 +7,8 @@ import DragAndDrop from "../../../components/DragAndDrop";
 import { getQuestionsByLessonId, patchUserProgress } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
 import FillInTheBlank from "../../../components/FillInTheBlank";
+
+import LottieView from 'lottie-react-native';
 
 export default function Lesson() {
 	const [questions, setQuestions] = useState([]);
@@ -74,10 +77,28 @@ export default function Lesson() {
 		);
 	}
 
-	if (questions.length === 0) {
+	if (questions.length === 0 && Platform.OS === "android") {
 		return (
 			<View style={styles.background}>
 				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+
+				<LottieView
+					source={require("../../../assets/animation.json")}
+					style={{ width: "60%", height: "60%" }}
+					autoPlay
+					loop
+				/>
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
+			</View>
+		);
+	} else if (questions.length === 0 && Platform.OS != "android") {
+		return (
+			<View style={styles.background}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+			<Image src={mainImage} width={"100%"}></Image>
+
 				<Link href="/Home" style={styles.button}>
 					Return to lessons
 				</Link>
@@ -113,7 +134,7 @@ const styles = StyleSheet.create({
 
 	background: {
 		alignItems: "center",
-		backgroundColor: "#bbb",
+		backgroundColor: "#DBD2E0",
 		height: "100%",
 		paddingBottom: 15,
 	},
@@ -141,6 +162,12 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 5,
 		backgroundColor: "#fff",
+		borderWidth: 2.5,
+		borderColor: "black",
+		margin: 5,
+		color: "black",
+		backgroundColor: "#f8f8f8",
+		borderRadius: 15,
 	},
 
 	incorrect: {
