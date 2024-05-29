@@ -45,7 +45,7 @@ export default function CreateAccount() {
         <Image style={styles.image} source={upload} />
       </View>
       <TouchableOpacity style={styles.buttons}>
-        <Link href="/Home" style={styles.text}>
+        <Link href="/Home?welcome=true" style={styles.text}>
           Create profile & sign in
         </Link>
       </TouchableOpacity>
