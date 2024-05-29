@@ -20,24 +20,23 @@ export default function Start() {
 	const [signInDisabled, setSignInDisabled] = useState(false);
 
 	async function handleSignIn() {
-    setSignInDisabled(true)
+		setSignInDisabled(true);
 		try {
 			const userToSignIn = await getUserByUsername(userNameInput);
 			setUserNameErrorShown(false);
 			setPasswordErrorShown(false);
-      setSignInDisabled(false)
+			setSignInDisabled(false);
 
 			if (passwordInput === userToSignIn.data.user.password) {
 				setUser(userToSignIn.data.user);
-        router.replace("/Home")
+				router.replace("/Home");
 			} else {
 				setPasswordErrorShown(true);
 			}
-
 		} catch ({ response }) {
 			setUserNameErrorShown(true);
 			setPasswordErrorShown(false);
-      setSignInDisabled(false)
+			setSignInDisabled(false);
 			console.log(response);
 		}
 	}
@@ -77,15 +76,16 @@ export default function Start() {
 			{passwordErrorShown && <Text style={styles.errorMessage}>Incorrect password</Text>}
 
 			<View style={styles.padding}>
-				<TouchableOpacity style={styles.buttons} onPress={handleSignIn} disabled={signInDisabled} >
+				<TouchableOpacity style={styles.buttons} onPress={handleSignIn} disabled={signInDisabled}>
 					<Text style={styles.text}>Sign in</Text>
 				</TouchableOpacity>
-
-				<TouchableOpacity style={styles.buttons}>
-					<Link href="/Create-account" style={styles.text}>
-						Create an account
-					</Link>
-				</TouchableOpacity>
+				<Link
+					href="/Create-account"
+					style={[styles.text, styles.buttons, styles.createAccount]}
+					disabled={signInDisabled}
+				>
+					Create an account
+				</Link>
 			</View>
 		</View>
 	);
@@ -95,6 +95,11 @@ const styles = StyleSheet.create({
 	text: {
 		fontFamily: "monospace",
 		fontSize: 20,
+	},
+
+	createAccount: {
+		textAlign: "center",
+		verticalAlign: "middle",
 	},
 
 	container: {
