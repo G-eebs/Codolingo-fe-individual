@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, ScrollView } from 'react-native';
-import Modal from 'react-native-modal'; // Assuming you are using react-native-modal
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import Modal from "react-native-modal";
+import { useNavigation } from "@react-navigation/native";
 
 export default function WelcomePopUp({ isVisible }) {
   const [isModalVisible, setModalVisible] = useState(isVisible);
@@ -26,20 +32,18 @@ export default function WelcomePopUp({ isVisible }) {
       >
         <View style={styles.modalContainer}>
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            <Text style={styles.text}>Welcome to Codolingo!</Text>
-            <Text style={styles.text}>
+            <Text style={styles.title}>Welcome to Codolingo!</Text>
+            <Text style={styles.message}>
               To use this app simply make your way through the questions. Once
               you have completed one section, the next section will unlock.
             </Text>
-            <Text style={styles.text}>
+            <Text style={styles.message}>
               Play against friends and monitor your progress in our leaderboard
             </Text>
-            <Text style={styles.text}>Happy Coding!!!</Text>
-            <Button
-              color={styles.button.color}
-              title="Press here to start your coding journey"
-              onPress={navigateToHome}
-            />
+            <Text style={styles.message}>Happy Coding!!!</Text>
+            <TouchableOpacity style={styles.button} onPress={navigateToHome}>
+              <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
           </ScrollView>
         </View>
       </Modal>
@@ -77,6 +81,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    color: "#00C400",
+    backgroundColor: "#dbd2e0",
+    width: 100,
+    height: 40,
+    paddingTop: 10,
+    borderRadius: 15,
+  },
+
+  title: {
+    fontFamily: "monospace",
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#dbd2e0",
+    marginBottom: 15,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+
+  message: {
+    fontFamily: "monospace",
+    fontSize: 18,
+    color: "grey",
+    marginBottom: 15,
+    textAlign: "center",
+  },
+
+  buttonText: {
+    fontSize: 18,
+    color: "grey",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "monospace",
   },
 });
