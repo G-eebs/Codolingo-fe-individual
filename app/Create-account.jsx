@@ -74,12 +74,7 @@ export default function CreateAccount() {
 			<Text style={[styles.text, styles.createText]}>Create an account:</Text>
 
 			<View>
-				<TextInput
-					value={userNameInput}
-					onChangeText={setUserNameInput}
-					placeholder="username"
-					style={styles.form}
-				/>
+				<TextInput value={userNameInput} onChangeText={setUserNameInput} placeholder="username" style={styles.form} />
 
 				{userNameErrorShown && (
 					<Text style={styles.errorMessage}>
@@ -119,7 +114,9 @@ export default function CreateAccount() {
 						</Pressable>
 					);
 				})}
-				<Image style={styles.image} source={upload} />
+				<TouchableOpacity>
+					<Image style={styles.image} source={upload} />
+				</TouchableOpacity>
 			</View>
 			<TouchableOpacity onPress={handleCreate} style={[styles.buttons, styles.text]} disabled={createDisabled}>
 				<Text style={styles.text}>Create profile & sign in</Text>
@@ -144,8 +141,8 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontSize: 25,
-    flexWrap: "wrap",
-    flex: 1,
+		flexWrap: "wrap",
+		flex: 1,
 	},
 
 	header: {
