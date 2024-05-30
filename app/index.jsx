@@ -57,6 +57,7 @@ export default function Start() {
 				onChangeText={setUserNameInput}
 				placeholder="username"
 				style={styles.form}
+	
 			/>
 
 			{userNameErrorShown && <Text style={styles.errorMessage}>Username does not exist</Text>}
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontFamily: "monospace",
 		borderRadius: 15,
+		borderColor: "green",
 	},
 
 	buttons: {
