@@ -134,39 +134,6 @@ export default function Lesson() {
     );
   }
 
-  if (questions.length === 0 && Platform.OS === "android") {
-    return (
-      <View style={styles.background}>
-        <Text style={[styles.text, styles.incorrect]}>
-          Lesson complete, Well done!
-        </Text>
-
-        <LottieView
-          source={require("../../../assets/animation.json")}
-          style={{ width: "60%", height: "60%" }}
-          autoPlay
-          loop
-        />
-        <Link href="/Home" style={styles.button}>
-          Return to lessons
-        </Link>
-      </View>
-    );
-  } else if (questions.length === 0 && Platform.OS != "android") {
-    return (
-      <View style={styles.background}>
-        <Text style={[styles.text, styles.incorrect]}>
-          Lesson complete, Well done!
-        </Text>
-        <Image src={mainImage} width={"100%"}></Image>
-
-        <Link href="/Home" style={styles.button}>
-          Return to lessons
-        </Link>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.background}>
       <ScrollView contentContainerStyle={styles.lesson}>
@@ -206,7 +173,7 @@ const styles = StyleSheet.create({
   },
   background: {
     alignItems: "center",
-    backgroundColor: "#bbb",
+    backgroundColor: "#dbd2e0",
     height: "100%",
     paddingBottom: 15,
   },
@@ -226,11 +193,12 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 20,
     fontWeight: "600",
-    borderColor: "blue",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: "#fff",
+	borderWidth: 2.5,
+	borderColor: "black",
+	margin: 5,
+	color: "black",
+	backgroundColor: "#f8f8f8",
+	borderRadius: 15,
   },
   incorrect: {
     marginVertical: 15,
