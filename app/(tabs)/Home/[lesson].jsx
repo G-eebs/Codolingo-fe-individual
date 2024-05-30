@@ -24,6 +24,7 @@ import LottieView from "lottie-react-native";
 
 export default function Lesson() {
   const [questions, setQuestions] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [userAnswer, setUserAnswer] = useState(null);
   const [incorrect, setIncorrect] = useState(false);
@@ -59,9 +60,11 @@ export default function Lesson() {
     getQuestionsByLessonId(lessonId)
       .then((response) => {
         const requestedQuestions = response.data.questions;
+
         const filteredQuestions = requestedQuestions.filter(
           (question) => !user.progress.includes(question._id)
         );
+
         setQuestions(filteredQuestions);
         setLoading(false);
       })
@@ -86,8 +89,13 @@ export default function Lesson() {
     }
   }, [questions]);
 
-  const handleSubmit = async () => {
-    if (userAnswer === questions[0].answer) {
+    const handleSubmit = async () => {
+    let correct = questions[0].answer === userAnswer 
+
+    if (typeof questions[0].answer === 'object') {
+      correct = questions[0].answer.toString() === userAnswer.toString()
+    }
+    if (correct) {
       try {
         await correctSound.current.replayAsync();
       } catch (error) {
@@ -134,7 +142,6 @@ export default function Lesson() {
     );
   }
 
-
 	if (questions.length === 0 && Platform.OS === "android") {
     return (
       <View style={styles.background}>
@@ -160,7 +167,6 @@ export default function Lesson() {
           Lesson complete, Well done!
         </Text>
         <Image src={mainImage} width={"100%"}></Image>
-
         <Link href="/Home" style={styles.button}>
           Return to lessons
         </Link>
@@ -255,15 +261,18 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 20,
     fontWeight: "600",
-	borderWidth: 2.5,
-	borderColor: "black",
-	margin: 5,
-	color: "black",
-	backgroundColor: "#f8f8f8",
-	borderRadius: 15,
+    borderWidth: 2.5,
+    borderColor: "black",
+    margin: 5,
+    color: "black",
+    backgroundColor: "#f8f8f8",
+    borderRadius: 15,
   },
   incorrect: {
     marginVertical: 15,
     textAlign: "center",
+  },
+  dragAndDropContainer: {
+    width: "100%",
   },
 });
