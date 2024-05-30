@@ -1,11 +1,13 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import ScoreCard from "../../components/ScoreCard";
 import { getAllUsers } from "../../utils/utils";
+import { UserContext } from "../../contexts/User"
 
 export default function Leaderboard() {
 	const [loading, setLoading] = useState(true);
 	const [users, setUsers] = useState([]);
+	const {user} = useContext(UserContext)
 
 	useEffect(() => {
 		getAllUsers()
@@ -18,7 +20,7 @@ export default function Leaderboard() {
         console.log(error);
         setLoading(false);
 			});
-	}, []);
+	}, [user]);
 
 	if (loading) return <Text>Loading...</Text>;
 
