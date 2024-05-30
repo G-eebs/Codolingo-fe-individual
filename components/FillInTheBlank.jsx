@@ -7,7 +7,7 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 export default function FillInTheBlank({ question,
   userAnswer,
   setUserAnswer }) {
-  const [text, onChangeText] = useState('');
+  const [text, setText] = useState('');
 
   return (
     <View style={styles.questionSection}>
@@ -15,7 +15,7 @@ export default function FillInTheBlank({ question,
 
       <Text style={styles.question}>{question.question}</Text>
 
-      <TextInput style={styles.form} onChangeText={onChangeText} value={text} placeholder='Type your answer here...' onEndEditing={() => {setUserAnswer(text.toLowerCase())}} />
+      <TextInput style={styles.form} onChangeText={setText} value={text} placeholder='Type your answer here...' onBlur={() => {setUserAnswer(text.toLowerCase())}} />
     </View>
   )
 }
