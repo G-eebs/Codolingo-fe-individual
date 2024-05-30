@@ -144,7 +144,6 @@ export default function Lesson() {
 		return (
 			<View style={styles.background}>
 				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
-			<Image src={mainImage} width={"100%"}></Image>
 
 				<Link href="/Home" style={styles.button}>
 					Return to lessons
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
   },
   background: {
     alignItems: "center",
-    backgroundColor: "#bbb",
+    backgroundColor: "#dbd2e0",
     height: "100%",
     paddingBottom: 15,
   },
@@ -212,11 +211,12 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 20,
     fontWeight: "600",
-    borderColor: "blue",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: "#fff",
+	borderWidth: 2.5,
+	borderColor: "black",
+	margin: 5,
+	color: "black",
+	backgroundColor: "#f8f8f8",
+	borderRadius: 15,
   },
   incorrect: {
     marginVertical: 15,
