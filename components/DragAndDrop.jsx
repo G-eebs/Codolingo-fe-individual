@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   teaching: {
-    backgroundColor: "aliceblue",
+    backgroundColor: "#ECE7E9",
     fontFamily: "monospace",
     fontSize: 20,
     marginBottom: 10,
