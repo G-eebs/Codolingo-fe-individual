@@ -78,7 +78,7 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer }) => {
   };
   
   return (
-    <>
+    <View style={styles.outer}>
       <View style={styles.questionSection}>
         <Text style={styles.teaching}>{question.teaching}</Text>
         <Text style={styles.question}>{question.question}</Text>
@@ -97,11 +97,14 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer }) => {
         renderItem={renderItem}
         renderZone={renderZone}
       />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outer: {
+    flex: 1,
+  },
   questionSection: {
     padding: 10,
     alignItems: "center",
@@ -112,6 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     padding: 10,
+    borderRadius: 15,
   },
   question: {
     fontFamily: "monospace",
@@ -122,15 +126,14 @@ const styles = StyleSheet.create({
   },
   dragZoneStyle: {
     padding: 10,
-    marginVertical: 10,
+    marginVertical: 5,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#ccc',
   },
   dragZoneTextStyle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
   itemsContainerStyle: {
     flexDirection: 'row',
@@ -139,9 +142,12 @@ const styles = StyleSheet.create({
   },
   dragItemStyle: {
     backgroundColor: '#e3e3e3',
-    padding: 10,
     margin: 5,
     borderRadius: 5,
+    width: 40,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   dragItemTextStyle: {
     fontSize: 16,
