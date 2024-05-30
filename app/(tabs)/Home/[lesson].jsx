@@ -213,11 +213,9 @@ export default function Lesson() {
           />
         )}
         {questions[0].type === "drag and drop" && (
-          <DragAndDrop
-            question={questions[0]}
-            userAnswer={userAnswer}
-            setUserAnswer={setUserAnswer}
-          />
+          <View style={styles.dragAndDropContainer}>
+            <DragAndDrop question={questions[0]} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+          </View>
         )}
         {questions[0].type === "fill in the blank" && (
           <FillInTheBlank
