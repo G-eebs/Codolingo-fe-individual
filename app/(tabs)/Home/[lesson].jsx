@@ -262,6 +262,8 @@ const styles = StyleSheet.create({
     color: "black",
     backgroundColor: "#f8f8f8",
     borderRadius: 15,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   incorrect: {
     marginVertical: 15,
