@@ -77,13 +77,11 @@ export default function Lesson() {
   useEffect(() => {
     if (questions.length === 0) {
       const playLessonCompleteSound = async () => {
-        setTimeout(async () => {
-          try {
-            await completedSound.current.playAsync();
-          } catch (error) {
-            console.log(error);
-          }
-        }, 1000);
+        try {
+          await completedSound.current.replayAsync(); 
+        } catch (error) {
+          console.log(error);
+        }
       };
       playLessonCompleteSound();
     }
