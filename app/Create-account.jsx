@@ -76,9 +76,7 @@ export default function CreateAccount() {
 			<View>
 				<TextInput
 					value={userNameInput}
-					onChangeText={(username) => {
-						setUserNameInput(username);
-					}}
+					onChangeText={setUserNameInput}
 					placeholder="username"
 					style={styles.form}
 				/>
@@ -93,11 +91,10 @@ export default function CreateAccount() {
 
 				<TextInput
 					value={passwordInput}
-					onChangeText={(password) => {
-						setPasswordInput(password);
-					}}
+					onChangeText={setPasswordInput}
 					placeholder="password"
 					style={styles.form}
+					secureTextEntry={true}
 				/>
 
 				{passwordErrorShown && (

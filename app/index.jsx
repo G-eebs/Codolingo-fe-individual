@@ -54,9 +54,7 @@ export default function Start() {
 
 			<TextInput
 				value={userNameInput}
-				onChangeText={(username) => {
-					setUserNameInput(username);
-				}}
+				onChangeText={setUserNameInput}
 				placeholder="username"
 				style={styles.form}
 			/>
@@ -66,9 +64,7 @@ export default function Start() {
 			<TextInput
 				value={passwordInput}
 				secureTextEntry={true}
-				onChangeText={(password) => {
-					setPasswordInput(password);
-				}}
+				onChangeText={setPasswordInput}
 				placeholder="password"
 				style={styles.form}
 			/>
