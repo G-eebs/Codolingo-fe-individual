@@ -1,10 +1,53 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 export default function Settings() {
   return (
-    <View>
-      <Text>Settings</Text>
+    <View style={styles.page}>
+      <TouchableOpacity>
+        <Text style={styles.profile}>Profile</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.soundEffects}>Sound Effects</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.help}>Help Centre</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity>
+        <Text style={styles.feedback}>Feedback</Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  profile: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  soundEffects: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  help: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  feedback: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  page: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "stretch",
+    justifyContent: "center",
+    padding: 15,
+    backgroundColor: "#dbd2e0",
+  },
+});

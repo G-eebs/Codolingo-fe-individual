@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Link } from "expo-router";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { Link, useGlobalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
 import { getAllLessons } from "../../../utils/utils";
 import { UserContext } from "../../../contexts/User";
 import CircularProgress from "react-native-circular-progress-indicator";
-import 'react-native-gesture-handler';
+import WelcomePopUp from "../../../components/WelcomePopup";
 const MainImage = require("../../../assets/geoffrey.jpg");
 
 export default function Home() {
 	const [allLessons, setAllLessons] = useState([]);
+	const { welcome } = useGlobalSearchParams();
+	const showModal = welcome === "true";
 
 	const [loading, setLoading] = useState(true);
 
@@ -32,44 +34,51 @@ export default function Home() {
 		return <Text style={[styles.text, styles.loading]}>Loading...</Text>;
 	}
 
-  function calculateLessonProgress(lessonQuestions, userProgress) {
-    const completedQuestions = lessonQuestions.filter(question => userProgress.includes(question))
-    return completedQuestions.length / lessonQuestions.length * 100
-  }
+	function calculateLessonProgress(lessonQuestions, userProgress) {
+		const completedQuestions = lessonQuestions.filter((question) => userProgress.includes(question));
+		return (completedQuestions.length / lessonQuestions.length) * 100;
+	}
 
 	return (
-		<View style={styles.page}>
+		<ScrollView style={styles.page}>
 			<View style={styles.header}>
 				<Text style={[styles.text, styles.title]}>{"Click on a lesson\nto begin..."}</Text>
 				<Image style={styles.image} source={MainImage} />
 			</View>
 
 			<View style={styles.lessons}>
-				{allLessons.map((lesson) => {
+				{allLessons.map((lesson, index) => {
 					return (
-						<Link key={lesson._id} style={styles.lesson} href={`/Home/${lesson._id}`}>
+						<Link
+							key={lesson._id}
+							style={[styles.lesson, { marginRight: (index * 100) % 200, marginLeft: 50 }]}
+							href={`/Home/${lesson._id}`}
+						>
 							<CircularProgress
 								value={calculateLessonProgress(lesson.questions, user.progress)}
 								title={lesson._id}
-                radius={30}
-                titleFontSize={18}
-                circleBackgroundColor={'#333'}
+								radius={40}
+								titleFontSize={24}
+								circleBackgroundColor={"#333"}
 								showProgressValue={false}
+								activeStrokeColor={"#00C400"}
+								titleStyle={{ fontWeight: "bold" }}
 								style={styles.progressCircle}
-							></CircularProgress>
+							/>
 						</Link>
 					);
 				})}
 			</View>
-		</View>
+			<WelcomePopUp isVisible={showModal} />
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-  page : {
-    height: "100%",
-    backgroundColor: "#bbb",
-  },
+	page: {
+		height: "100vh",
+		backgroundColor: "#dbd2e0",
+	},
 
 	text: {
 		fontFamily: "monospace",
@@ -80,17 +89,17 @@ const styles = StyleSheet.create({
 		paddingTop: 15,
 		textAlign: "center",
 		height: "100%",
-    backgroundColor: "#bbb",
+		backgroundColor: "#dbd2e0",
 	},
 
 	header: {
 		padding: 15,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
+		borderBottomColor: "rgba(0,0,0,.2)",
+		borderBottomWidth: 1,
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-    backgroundColor: "#aaa",
+		backgroundColor: "rgba(0,0,0,.10)",
 	},
 
 	title: {},
@@ -106,6 +115,7 @@ const styles = StyleSheet.create({
 	lessons: {
 		flexDirection: "column",
 		alignItems: "center",
+    paddingBottom: 15,
 	},
 
 	progressCircle: {
@@ -118,8 +128,6 @@ const styles = StyleSheet.create({
 	},
 
 	lesson: {
-    marginTop: 15,
-    height: 60,
+		marginTop: 15,
 	},
-
 });
