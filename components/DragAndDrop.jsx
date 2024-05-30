@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DragAndDrop from 'volkeno-react-native-drag-drop';
 
-const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
- }) => {
+const PythonSymbolsDragAndDrop = ({ question, setUserAnswer }) => {
+
+  useEffect(()=> {setUserAnswer([])}, [])
+
   const descriptions = [
     { id: '<=', text: 'Less than or equal to', layout: {} },
     { id: '!=', text: 'Not equal to', layout: {} },
@@ -47,8 +49,6 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
   const onMaj = (zones, items) => {
     let allCorrect = true;
   
-    console.log(userAnswer)
-
     correctMatches.forEach(({ symbol, description }) => {
       const matchedZone = zones.find((zone) => zone.text === description);
       
@@ -71,11 +71,8 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
     });
   
     if (allCorrect) {
-      console.log('All correct!');
-      console.log(question.answer)
       setUserAnswer(["==", "!=", ">", "<", ">=", "<="])
     } else {
-      console.log('Not all correct. Try again.');
       setUserAnswer([])
     }
   };
