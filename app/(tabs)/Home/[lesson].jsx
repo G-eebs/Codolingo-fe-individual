@@ -166,7 +166,6 @@ export default function Lesson() {
         <Text style={[styles.text, styles.incorrect]}>
           Lesson complete, Well done!
         </Text>
-        <Image src={mainImage} width={"100%"}></Image>
         <Link href="/Home" style={styles.button}>
           Return to lessons
         </Link>
