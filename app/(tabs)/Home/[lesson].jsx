@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+  Image,
+} from "react-native";
 import { useContext, useEffect, useState, useRef } from "react";
 import { Link, useLocalSearchParams } from "expo-router";
 import MultipleChoice from "../../../components/MultipleChoice";
@@ -12,7 +20,7 @@ import {
 import { UserContext } from "../../../contexts/User";
 import { Audio } from "expo-av";
 
-import LottieView from 'lottie-react-native';
+import LottieView from "lottie-react-native";
 
 export default function Lesson() {
   const [questions, setQuestions] = useState([]);
@@ -66,11 +74,13 @@ export default function Lesson() {
   useEffect(() => {
     if (questions.length === 0) {
       const playLessonCompleteSound = async () => {
-        try {
-          await completedSound.current.replayAsync();
-        } catch (error) {
-          console.log(error);
-        }
+        setTimeout(async () => {
+          try {
+            await completedSound.current.playAsync();
+          } catch (error) {
+            console.log(error);
+          }
+        }, 1000);
       };
       playLessonCompleteSound();
     }
@@ -123,34 +133,6 @@ export default function Lesson() {
       </View>
     );
   }
-
-	if (questions.length === 0 && Platform.OS === "android") {
-		return (
-			<View style={styles.background}>
-				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
-
-				<LottieView
-					source={require("../../../assets/animation.json")}
-					style={{ width: "60%", height: "60%" }}
-					autoPlay
-					loop
-				/>
-				<Link href="/Home" style={styles.button}>
-					Return to lessons
-				</Link>
-			</View>
-		);
-	} else if (questions.length === 0 && Platform.OS != "android") {
-		return (
-			<View style={styles.background}>
-				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
-
-				<Link href="/Home" style={styles.button}>
-					Return to lessons
-				</Link>
-			</View>
-		);
-	}
 
   return (
     <View style={styles.background}>
@@ -222,5 +204,4 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     textAlign: "center",
   },
-
 });
