@@ -134,6 +134,68 @@ export default function Lesson() {
     );
   }
 
+
+	if (questions.length === 0 && Platform.OS === "android") {
+    return (
+      <View style={styles.background}>
+        <Text style={[styles.text, styles.incorrect]}>
+          Lesson complete, Well done!
+        </Text>
+
+        <LottieView
+          source={require("../../../assets/animation.json")}
+          style={{ width: "60%", height: "60%" }}
+          autoPlay
+          loop
+        />
+        <Link href="/Home" style={styles.button}>
+          Return to lessons
+        </Link>
+      </View>
+    );
+  } else if (questions.length === 0 && Platform.OS != "android") {
+    return (
+      <View style={styles.background}>
+        <Text style={[styles.text, styles.incorrect]}>
+          Lesson complete, Well done!
+        </Text>
+        <Image src={mainImage} width={"100%"}></Image>
+
+        <Link href="/Home" style={styles.button}>
+          Return to lessons
+        </Link>
+      </View>
+    );
+  }
+
+	if (questions.length === 0 && Platform.OS === "android") {
+		return (
+			<View style={styles.background}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+
+				<LottieView
+					source={require("../../../assets/animation.json")}
+					style={{ width: "60%", height: "60%" }}
+					autoPlay
+					loop
+				/>
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
+			</View>
+		);
+	} else if (questions.length === 0 && Platform.OS != "android") {
+		return (
+			<View style={styles.background}>
+				<Text style={[styles.text, styles.incorrect]}>Lesson complete, Well done!</Text>
+
+				<Link href="/Home" style={styles.button}>
+					Return to lessons
+				</Link>
+			</View>
+		);
+	}
+
   return (
     <View style={styles.background}>
       <ScrollView contentContainerStyle={styles.lesson}>
