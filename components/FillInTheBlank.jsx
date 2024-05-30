@@ -22,8 +22,9 @@ export default function FillInTheBlank({ question,
 
 const styles = StyleSheet.create({
   questionSection: {
-    padding: 10,
-    alignItems: "center",
+    padding: 15,
+    alignItems: "stretch",
+    justifyContent: "center",
   },
   teaching: {
     backgroundColor: "#ECE7E9",
@@ -31,20 +32,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 6,
     lineHeight: 28,
+    borderRadius: 15,
   },
   question: {
     fontFamily: "monospace",
     fontSize: 20,
     marginTop: 5,
-    fontWeight: "600",
+    fontWeight: "bold",
     padding: 6,
-    
   },
   form: {
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     padding: 15,
-    paddingHorizontal:80,
+    marginHorizontal: 30,
     justifyContent: "space-around",
     backgroundColor: "#9d8189",
     borderRadius: 4,

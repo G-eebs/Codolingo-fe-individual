@@ -40,12 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 6,
     lineHeight: 28,
+    borderRadius: 15,
   },
   question: {
     fontFamily: "monospace",
     fontSize: 20,
     marginTop: 5,
-    fontWeight: "530",
+    fontWeight: "bold",
     padding: 6,
   },
   option: {

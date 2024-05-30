@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 20,
     marginTop: 5,
-    fontWeight: "600",
-    textDecorationLine: "underline",
+    fontWeight: "bold",
   },
   dragZoneStyle: {
     padding: 10,
