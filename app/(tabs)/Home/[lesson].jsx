@@ -36,7 +36,13 @@ export default function Lesson() {
   }, []);
 
   function handleSubmit() {
-    if (userAnswer === questions[0].answer) {
+    let correct = questions[0].answer === userAnswer 
+
+    if (typeof questions[0].answer === 'object') {
+      correct = questions[0].answer.toString() === userAnswer.toString()
+    }
+
+    if (correct) {
       patchUserProgress(user.user_name, { progress: questions[0]._id }).then((response) => {
         setUser(response.data.user);
         setQuestions((current) => {
@@ -150,6 +156,6 @@ const styles = StyleSheet.create({
   },
 
   dragAndDropContainer: {
-    width: "100%", // Ensure the DragAndDrop component takes full width
+    width: "100%",
   },
 });

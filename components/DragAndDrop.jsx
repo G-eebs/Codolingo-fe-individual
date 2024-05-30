@@ -49,17 +49,14 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
   
     console.log(userAnswer)
 
-    // Check if all correct matches are found in the zones
     correctMatches.forEach(({ symbol, description }) => {
       const matchedZone = zones.find((zone) => zone.text === description);
       
-      // If matched zone is not found or if the matched zone doesn't contain the correct symbol
       if (!matchedZone || !matchedZone.items || matchedZone.items.length !== 1 || matchedZone.items[0] !== symbol) {
         allCorrect = false;
       }
     });
   
-    // Check if all items are placed in a zone
     items.forEach(item => {
       const found = zones.some(zone => zone.items && zone.items.includes(item));
       if (!found) {
@@ -67,7 +64,6 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
       }
     });
   
-    // Check if there are any extra items placed in the zones
     zones.forEach(zone => {
       if (zone.items && zone.items.length > 1) {
         allCorrect = false;
@@ -76,12 +72,11 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
   
     if (allCorrect) {
       console.log('All correct!');
-      // Navigate to the next question or perform any other action
       console.log(question.answer)
       setUserAnswer(["==", "!=", ">", "<", ">=", "<="])
     } else {
       console.log('Not all correct. Try again.');
-      // Provide feedback to the user that they need to try again
+      setUserAnswer([])
     }
   };
   
@@ -92,6 +87,7 @@ const PythonSymbolsDragAndDrop = ({ question, setUserAnswer, userAnswer
         <Text style={styles.question}>{question.question}</Text>
       </View>
       <DragAndDrop
+        maxItemsPerZone={1}
         style={styles.container}
         contentContainerStyle={styles.contentContainerStyle}
         itemKeyExtractor={(item) => item}
