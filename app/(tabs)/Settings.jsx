@@ -17,6 +17,15 @@ export default function Settings() {
       <TouchableOpacity>
         <Text style={styles.feedback}>Feedback</Text>
       </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.privacy}>Privacy</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.termsAndConditions}>T&C's</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.about}>About</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -49,5 +58,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
     backgroundColor: "#dbd2e0",
+  },
+  privacy: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  termsAndConditions: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
+  },
+  about: {
+    fontFamily: "monospace",
+    fontSize: 20,
+    padding: 10,
   },
 });
