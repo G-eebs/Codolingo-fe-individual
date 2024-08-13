@@ -4,7 +4,7 @@ Codolingo is an Android-based app designed to teach beginners the fundamentals o
 
 This app is built using React Native. 
 
-A live version of this app can be found at: _(to add in later)_
+This is a public copy of our original repository.
 
 ## Getting Started
 
